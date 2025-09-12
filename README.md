@@ -13,23 +13,23 @@ A comprehensive fitness tracking application built with Flutter that helps users
 - 📝 **Notes and Insights**: Add personal notes to your workout sessions for future reference
 - 📅 **Historical Data**: Access your complete fitness history to analyze trends and improvements
 
-## Technology Stack
+## 🛠️ Technology Stack
 
-- **Framework**: Flutter (Dart)
-- **State Management**: Provider
-- **Data Persistence**: SQLite (sqflite)
-- **Charts and Visualizations**: fl_chart
-- **Date & Time Utilities**: intl
+- 📱 **Framework**: Flutter (Dart)
+- 🧩 **State Management**: Provider
+- 💾 **Data Persistence**: SQLite (sqflite)
+- 📊 **Charts and Visualizations**: fl_chart
+- 📆 **Date & Time Utilities**: intl
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- Flutter SDK (>= 2.19.0)
-- Dart SDK (>= 2.19.0)
-- Android Studio / VS Code with Flutter extensions
+- 📦 Flutter SDK (>= 2.19.0)
+- 🎯 Dart SDK (>= 2.19.0)
+- 💻 Android Studio / VS Code with Flutter extensions
 
-### Installation
+### ⚙️ Installation
 
 1. Clone the repository:
    ```bash
@@ -51,60 +51,68 @@ A comprehensive fitness tracking application built with Flutter that helps users
    flutter run
    ```
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 lib/
-├── main.dart                # Application entry point
+├── main.dart                # 🏁 Application entry point
 ├── db/
-│   └── database_helper.dart # SQLite database operations
+│   └── database_helper.dart # 💾 SQLite database operations
 ├── models/
-│   └── activity.dart        # Data model for fitness activities
+│   └── activity.dart        # 📊 Data model for fitness activities
 ├── providers/
-│   └── activity_provider.dart # State management for activities
+│   └── activity_provider.dart # 🔄 State management for activities
 ├── screens/
-│   ├── dashboard_screen.dart # Main dashboard UI
-│   └── add_log_screen.dart   # Screen to add new activities
+│   ├── dashboard_screen.dart # 🏠 Main dashboard UI
+│   └── add_log_screen.dart   # ➕ Screen to add new activities
 └── widgets/
-    ├── activity_list_item.dart # List item for activities
-    └── summary_card.dart       # Summary card for dashboard
+    ├── activity_list_item.dart # 📋 List item for activities
+    └── summary_card.dart       # 📇 Summary card for dashboard
 ```
 
-## Usage
+## 📱 Usage
 
-1. **View Dashboard**: Open the app to see your daily and weekly fitness summary.
-2. **Add New Activity**: Tap the "+" button to log a new activity or workout.
-3. **Record Metrics**: Enter steps, workout type, duration, and calories.
-4. **Add Notes**: Include additional notes for your workout session.
-5. **View Progress**: Check the charts on the dashboard to see your progress over time.
+1. 🏠 **View Dashboard**: Open the app to see your daily and weekly fitness summary.
+2. ➕ **Add New Activity**: Tap the "+" button to log a new activity or workout.
+3. 📊 **Record Metrics**: Enter steps, workout type, duration, and calories.
+4. 📝 **Add Notes**: Include additional notes for your workout session.
+5. 📈 **View Progress**: Check the charts on the dashboard to see your progress over time.
 
-## Roadmap
+## 🗺️ Roadmap
 
-- **Social Features**: Share achievements with friends
-- **Fitness Challenges**: Join community challenges
-- **Nutrition Tracking**: Log and monitor daily food intake
-- **Integration with Wearables**: Connect with fitness devices for automatic tracking
-- **Custom Goals**: Set personalized fitness goals and track progress
+- 🤝 **Social Features**: Share achievements with friends
+- 🏆 **Fitness Challenges**: Join community challenges
+- 🥗 **Nutrition Tracking**: Log and monitor daily food intake
+- ⌚ **Integration with Wearables**: Connect with fitness devices for automatic tracking
+- 🎯 **Custom Goals**: Set personalized fitness goals and track progress
 
-## Contributing
+## 🤝 Contributing
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+1. 🍴 Fork the repository
+2. 🌿 Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. 💾 Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. 📤 Push to the branch (`git push origin feature/amazing-feature`)
+5. 🔍 Open a Pull Request
 
-## License
+## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Acknowledgements
+## 🙏 Acknowledgements
 
-- [Flutter](https://flutter.dev/)
-- [Provider](https://pub.dev/packages/provider)
-- [sqflite](https://pub.dev/packages/sqflite)
-- [fl_chart](https://pub.dev/packages/fl_chart)
+- 🎯 [Flutter](https://flutter.dev/)
+- 🧩 [Provider](https://pub.dev/packages/provider)
+- 💾 [sqflite](https://pub.dev/packages/sqflite)
+- 📊 [fl_chart](https://pub.dev/packages/fl_chart)
 
-## Contact
+## 📬 Contact
 
-Project Link: [https://github.com/RensithUdara/PulseUp-Mobile-App](https://github.com/RensithUdara/PulseUp-Mobile-App)
+📱 Project Link: [https://github.com/RensithUdara/PulseUp-Mobile-App](https://github.com/RensithUdara/PulseUp-Mobile-App)
+
+---
+
+<div align="center">
+
+### ❤️ Made with passion for a healthier lifestyle ❤️
+
+</div>
