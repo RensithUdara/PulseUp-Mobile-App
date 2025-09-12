@@ -1,10 +1,10 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:fl_chart/fl_chart.dart';
 
 import '../providers/activity_provider.dart';
-import 'add_log_screen.dart';
 import '../widgets/activity_list_item.dart';
+import 'add_log_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class DashboardScreen extends StatelessWidget {
         child: const Icon(Icons.add),
         onPressed: () {
           Navigator.of(context).push(
-            MaterialPageRoute(builder: (_) => AddLogScreen()),
+            MaterialPageRoute(builder: (_) => const AddLogScreen()),
           );
         },
       ),
@@ -63,7 +63,7 @@ class DashboardScreen extends StatelessWidget {
                   const SizedBox(height: 16),
                   Text(
                     'Last 7 Days',
-                    style: Theme.of(context).textTheme.headline6,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(height: 8),
                   SizedBox(
@@ -140,7 +140,7 @@ class DashboardScreen extends StatelessWidget {
                   const SizedBox(height: 16),
                   Text(
                     'Recent Logs',
-                    style: Theme.of(context).textTheme.headline6,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(height: 8),
                   ...provider.activities
