@@ -2,8 +2,6 @@
 
 A comprehensive fitness tracking application built with Flutter that helps users monitor their daily activities, workouts, and health metrics.
 
-![PulseUp App](https://via.placeholder.com/800x400?text=PulseUp+App+Screenshot)
-
 ## Features
 
 - **Activity Tracking**: Log and monitor daily steps, calories burned, and workout sessions
@@ -33,7 +31,7 @@ A comprehensive fitness tracking application built with Flutter that helps users
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/fitness_tracker_app.git
+   git clone https://github.com/RensithUdara/PulseUp-Mobile-App.git
    ```
 
 2. Navigate to the project directory:
@@ -78,12 +76,6 @@ lib/
 4. **Add Notes**: Include additional notes for your workout session.
 5. **View Progress**: Check the charts on the dashboard to see your progress over time.
 
-## Screenshots
-
-![Dashboard Screen](https://via.placeholder.com/250x500?text=Dashboard+Screen)
-![Add Activity Screen](https://via.placeholder.com/250x500?text=Add+Activity+Screen)
-![Weekly Progress](https://via.placeholder.com/250x500?text=Weekly+Progress)
-
 ## Roadmap
 
 - **Social Features**: Share achievements with friends
@@ -113,6 +105,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-Your Name - [@yourtwitter](https://twitter.com/yourtwitter) - email@example.com
-
-Project Link: [https://github.com/yourusername/fitness_tracker_app](https://github.com/yourusername/fitness_tracker_app)
+Project Link: [https://github.com/RensithUdara/PulseUp-Mobile-App](https://github.com/RensithUdara/PulseUp-Mobile-App)
