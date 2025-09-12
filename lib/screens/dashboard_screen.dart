@@ -1,4 +1,3 @@
-import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -77,25 +76,8 @@ class DashboardScreen extends StatelessWidget {
                       elevation: 2,
                       child: Padding(
                         padding: const EdgeInsets.all(12.0),
-                        child: charts.BarChart(
-                          _createWeeklyData(weekly),
-                          animate: true,
-                          domainAxis: const charts.OrdinalAxisSpec(
-                            renderSpec: charts.SmallTickRendererSpec(
-                              labelStyle: charts.TextStyleSpec(
-                                fontSize: 10,
-                                color: charts.MaterialPalette.black,
-                              ),
-                            ),
-                          ),
-                          primaryMeasureAxis: const charts.NumericAxisSpec(
-                            renderSpec: charts.GridlineRendererSpec(
-                              labelStyle: charts.TextStyleSpec(
-                                fontSize: 10,
-                                color: charts.MaterialPalette.black,
-                              ),
-                            ),
-                          ),
+                        child: CustomBarChart(
+                          data: weekly,
                         ),
                       ),
                     ),
@@ -119,36 +101,74 @@ class DashboardScreen extends StatelessWidget {
       ),
     );
   }
-
-  List<charts.Series<StepData, String>> _createWeeklyData(
-      List<int> weeklySteps) {
-    final today = DateTime.now();
-    final data = List<StepData>.generate(
-      weeklySteps.length,
-      (i) {
-        final day = DateTime(today.year, today.month, today.day)
-            .subtract(Duration(days: 6 - i));
-        final shortDay =
-            ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][day.weekday - 1];
-        return StepData(shortDay, weeklySteps[i]);
-      },
-    );
-
-    return [
-      charts.Series<StepData, String>(
-        id: 'Steps',
-        data: data,
-        domainFn: (StepData steps, _) => steps.day,
-        measureFn: (StepData steps, _) => steps.steps,
-        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-      )
-    ];
-  }
 }
 
-class StepData {
-  final String day;
-  final int steps;
+class CustomBarChart extends StatelessWidget {
+  final List<int> data;
 
-  StepData(this.day, this.steps);
+  const CustomBarChart({Key? key, required this.data}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // Get the max value for scaling
+    final maxValue = data.isEmpty
+        ? 0
+        : data.reduce((max, value) => value > max ? value : max);
+    final today = DateTime.now();
+
+    return Column(
+      children: [
+        Expanded(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: List.generate(
+              data.length,
+              (index) {
+                final value = data[index];
+                final day = DateTime(today.year, today.month, today.day)
+                    .subtract(Duration(days: 6 - index));
+                final shortDay = [
+                  'Mon',
+                  'Tue',
+                  'Wed',
+                  'Thu',
+                  'Fri',
+                  'Sat',
+                  'Sun'
+                ][day.weekday - 1];
+
+                return Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          value.toString(),
+                          style: const TextStyle(fontSize: 10),
+                        ),
+                        const SizedBox(height: 4),
+                        Container(
+                          height: maxValue > 0 ? (value / maxValue * 120) : 0,
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          shortDay,
+                          style: const TextStyle(fontSize: 10),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 }
