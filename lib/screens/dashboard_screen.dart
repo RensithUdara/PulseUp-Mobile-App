@@ -107,8 +107,8 @@ class DashboardScreen extends StatelessWidget {
                                   ][day.weekday - 1];
                                   return shortDay;
                                 },
-                                getTextStyles: (_, __) => 
-                                  const TextStyle(fontSize: 10),
+                                getTextStyles: (_, __) =>
+                                    const TextStyle(fontSize: 10),
                               ),
                             ),
                             barGroups: List.generate(
@@ -119,7 +119,8 @@ class DashboardScreen extends StatelessWidget {
                                   BarChartRodData(
                                     y: weekly[i].toDouble(),
                                     width: 14,
-                                    borderRadius: const BorderRadius.all(Radius.circular(4)),
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(4)),
                                     colors: [Colors.blueAccent],
                                   )
                                 ],
