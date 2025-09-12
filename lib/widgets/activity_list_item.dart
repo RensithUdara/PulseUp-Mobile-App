@@ -49,7 +49,8 @@ class ActivityListItem extends StatelessWidget {
                           context: context,
                           builder: (ctx) => AlertDialog(
                             title: const Text('Delete Activity'),
-                            content: const Text('Are you sure you want to delete this activity?'),
+                            content: const Text(
+                                'Are you sure you want to delete this activity?'),
                             actions: [
                               TextButton(
                                 onPressed: () {
@@ -59,7 +60,8 @@ class ActivityListItem extends StatelessWidget {
                               ),
                               TextButton(
                                 onPressed: () {
-                                  Provider.of<ActivityProvider>(context, listen: false)
+                                  Provider.of<ActivityProvider>(context,
+                                          listen: false)
                                       .deleteActivity(activity.id!);
                                   Navigator.of(ctx).pop();
                                 },
