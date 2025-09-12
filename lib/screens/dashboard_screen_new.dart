@@ -1,11 +1,11 @@
+import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:charts_flutter/flutter.dart' as charts;
 
 import '../providers/activity_provider.dart';
 import '../widgets/activity_list_item.dart';
-import 'add_log_screen.dart';
 import '../widgets/summary_card.dart';
+import 'add_log_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -80,7 +80,7 @@ class DashboardScreen extends StatelessWidget {
                         child: charts.BarChart(
                           _createWeeklyData(weekly),
                           animate: true,
-                          domainAxis: charts.OrdinalAxisSpec(
+                          domainAxis: const charts.OrdinalAxisSpec(
                             renderSpec: charts.SmallTickRendererSpec(
                               labelStyle: charts.TextStyleSpec(
                                 fontSize: 10,
@@ -88,7 +88,7 @@ class DashboardScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          primaryMeasureAxis: charts.NumericAxisSpec(
+                          primaryMeasureAxis: const charts.NumericAxisSpec(
                             renderSpec: charts.GridlineRendererSpec(
                               labelStyle: charts.TextStyleSpec(
                                 fontSize: 10,
@@ -120,14 +120,16 @@ class DashboardScreen extends StatelessWidget {
     );
   }
 
-  List<charts.Series<StepData, String>> _createWeeklyData(List<int> weeklySteps) {
+  List<charts.Series<StepData, String>> _createWeeklyData(
+      List<int> weeklySteps) {
     final today = DateTime.now();
     final data = List<StepData>.generate(
       weeklySteps.length,
       (i) {
         final day = DateTime(today.year, today.month, today.day)
             .subtract(Duration(days: 6 - i));
-        final shortDay = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][day.weekday - 1];
+        final shortDay =
+            ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][day.weekday - 1];
         return StepData(shortDay, weeklySteps[i]);
       },
     );
