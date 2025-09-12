@@ -80,42 +80,35 @@ class DashboardScreen extends StatelessWidget {
                             gridData: FlGridData(show: false),
                             borderData: FlBorderData(show: false),
                             titlesData: FlTitlesData(
-                              leftTitles: AxisTitles(
-                                sideTitles: SideTitles(showTitles: true),
-                              ),
-                              bottomTitles: AxisTitles(
-                                sideTitles: SideTitles(
-                                  showTitles: true,
-                                  getTitlesWidget: (value, meta) {
-                                    final index = value.toInt();
-                                    if (index < 0 || index >= weekly.length) {
-                                      return const SizedBox.shrink();
-                                    }
-                                    final today = DateTime.now();
-                                    final day = DateTime(
-                                      today.year,
-                                      today.month,
-                                      today.day,
-                                    ).subtract(
-                                      Duration(days: 6 - index),
-                                    );
-                                    final shortDay = [
-                                      'Mon',
-                                      'Tue',
-                                      'Wed',
-                                      'Thu',
-                                      'Fri',
-                                      'Sat',
-                                      'Sun'
-                                    ][day.weekday - 1];
-                                    return SideTitleWidget(
-                                      axisSide: meta.axisSide,
-                                      space: 4,
-                                      child: Text(shortDay,
-                                          style: const TextStyle(fontSize: 10)),
-                                    );
-                                  },
-                                ),
+                              leftTitles: SideTitles(showTitles: true),
+                              bottomTitles: SideTitles(
+                                showTitles: true,
+                                getTitles: (double value) {
+                                  final index = value.toInt();
+                                  if (index < 0 || index >= weekly.length) {
+                                    return '';
+                                  }
+                                  final today = DateTime.now();
+                                  final day = DateTime(
+                                    today.year,
+                                    today.month,
+                                    today.day,
+                                  ).subtract(
+                                    Duration(days: 6 - index),
+                                  );
+                                  final shortDay = [
+                                    'Mon',
+                                    'Tue',
+                                    'Wed',
+                                    'Thu',
+                                    'Fri',
+                                    'Sat',
+                                    'Sun'
+                                  ][day.weekday - 1];
+                                  return shortDay;
+                                },
+                                getTextStyles: (_, __) => 
+                                  const TextStyle(fontSize: 10),
                               ),
                             ),
                             barGroups: List.generate(
@@ -124,10 +117,10 @@ class DashboardScreen extends StatelessWidget {
                                 x: i,
                                 barRods: [
                                   BarChartRodData(
-                                    toY: weekly[i].toDouble(),
+                                    y: weekly[i].toDouble(),
                                     width: 14,
-                                    borderRadius: BorderRadius.circular(4),
-                                    color: Colors.blueAccent,
+                                    borderRadius: const BorderRadius.all(Radius.circular(4)),
+                                    colors: [Colors.blueAccent],
                                   )
                                 ],
                               ),
