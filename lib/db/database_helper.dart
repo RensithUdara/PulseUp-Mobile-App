@@ -79,3 +79,4 @@ notes TEXT
     db.close();
   }
 }
+}
