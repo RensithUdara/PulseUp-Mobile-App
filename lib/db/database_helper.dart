@@ -26,16 +26,16 @@ class DatabaseHelper {
 
   Future _createDB(Database db, int version) async {
     await db.execute('''
-CREATE TABLE activities(
-id INTEGER PRIMARY KEY AUTOINCREMENT,
-date TEXT NOT NULL,
-steps INTEGER NOT NULL,
-workoutType TEXT,
-duration INTEGER,
-calories INTEGER,
-notes TEXT
-)
-''');
+    CREATE TABLE activities(
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      date TEXT NOT NULL,
+      steps INTEGER NOT NULL,
+      workoutType TEXT,
+      duration INTEGER,
+      calories INTEGER,
+      notes TEXT
+    )
+    ''');
   }
 
   Future<Activity> insertActivity(Activity activity) async {
@@ -78,5 +78,4 @@ notes TEXT
     final db = await database;
     db.close();
   }
-}
 }
