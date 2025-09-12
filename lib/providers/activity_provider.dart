@@ -1,13 +1,16 @@
 import 'package:flutter/foundation.dart';
-final DatabaseHelper _db = DatabaseHelper.instance;
+import '../db/database_helper.dart';
+import '../models/activity.dart';
 
+class ActivityProvider with ChangeNotifier {
+  final DatabaseHelper _db = DatabaseHelper.instance;
+  List<Activity> _activities = [];
 
-ActivityProvider() {
-loadAllActivities();
-}
+  ActivityProvider() {
+    loadAllActivities();
+  }
 
-
-List<Activity> get activities => _activities;
+  List<Activity> get activities => _activities;
 
 
 Future loadAllActivities() async {
