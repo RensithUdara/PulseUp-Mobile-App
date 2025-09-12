@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:intl/intl.dart';
 
 import '../providers/activity_provider.dart';
 import '../widgets/activity_list_item.dart';
-import 'add_log_screen.dart';
 import '../widgets/summary_card.dart';
+import 'add_log_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -112,9 +111,11 @@ class CustomBarChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Get the max value for scaling
-    final maxValue = data.isEmpty ? 0 : data.reduce((max, value) => value > max ? value : max);
+    final maxValue = data.isEmpty
+        ? 0
+        : data.reduce((max, value) => value > max ? value : max);
     final today = DateTime.now();
-    
+
     return Column(
       children: [
         Expanded(
@@ -126,8 +127,16 @@ class CustomBarChart extends StatelessWidget {
                 final value = data[index];
                 final day = DateTime(today.year, today.month, today.day)
                     .subtract(Duration(days: 6 - index));
-                final shortDay = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][day.weekday - 1];
-                
+                final shortDay = [
+                  'Mon',
+                  'Tue',
+                  'Wed',
+                  'Thu',
+                  'Fri',
+                  'Sat',
+                  'Sun'
+                ][day.weekday - 1];
+
                 return Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 4.0),
