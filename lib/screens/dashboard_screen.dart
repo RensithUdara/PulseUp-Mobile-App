@@ -1,8 +1,10 @@
+import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/activity_provider.dart';
 import '../widgets/activity_list_item.dart';
+import '../widgets/summary_card.dart';
 import 'add_log_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -43,18 +45,19 @@ class DashboardScreen extends StatelessWidget {
                   Row(
                     children: [
                       Expanded(
-                        child: _buildSummaryCard(
-                          'Steps',
-                          stepsToday.toString(),
-                          Icons.directions_walk,
+                        child: SummaryCard(
+                          title: 'Steps',
+                          value: stepsToday.toString(),
+                          icon: Icons.directions_walk,
                         ),
                       ),
                       const SizedBox(width: 8),
                       Expanded(
-                        child: _buildSummaryCard(
-                          'Calories',
-                          caloriesToday.toString(),
-                          Icons.local_fire_department,
+                        child: SummaryCard(
+                          title: 'Calories',
+                          value: caloriesToday.toString(),
+                          icon: Icons.local_fire_department,
+                          color: Colors.orange,
                         ),
                       ),
                     ],
@@ -74,55 +77,22 @@ class DashboardScreen extends StatelessWidget {
                       elevation: 2,
                       child: Padding(
                         padding: const EdgeInsets.all(12.0),
-                        child: BarChart(
-                          BarChartData(
-                            gridData: FlGridData(show: false),
-                            borderData: FlBorderData(show: false),
-                            titlesData: FlTitlesData(
-                              leftTitles: SideTitles(showTitles: true),
-                              bottomTitles: SideTitles(
-                                showTitles: true,
-                                getTitles: (double value) {
-                                  final index = value.toInt();
-                                  if (index < 0 || index >= weekly.length) {
-                                    return '';
-                                  }
-                                  final today = DateTime.now();
-                                  final day = DateTime(
-                                    today.year,
-                                    today.month,
-                                    today.day,
-                                  ).subtract(
-                                    Duration(days: 6 - index),
-                                  );
-                                  final shortDay = [
-                                    'Mon',
-                                    'Tue',
-                                    'Wed',
-                                    'Thu',
-                                    'Fri',
-                                    'Sat',
-                                    'Sun'
-                                  ][day.weekday - 1];
-                                  return shortDay;
-                                },
-                                getTextStyles: (_, __) =>
-                                    const TextStyle(fontSize: 10),
+                        child: charts.BarChart(
+                          _createWeeklyData(weekly),
+                          animate: true,
+                          domainAxis: const charts.OrdinalAxisSpec(
+                            renderSpec: charts.SmallTickRendererSpec(
+                              labelStyle: charts.TextStyleSpec(
+                                fontSize: 10,
+                                color: charts.MaterialPalette.black,
                               ),
                             ),
-                            barGroups: List.generate(
-                              weekly.length,
-                              (i) => BarChartGroupData(
-                                x: i,
-                                barRods: [
-                                  BarChartRodData(
-                                    y: weekly[i].toDouble(),
-                                    width: 14,
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(4)),
-                                    colors: [Colors.blueAccent],
-                                  )
-                                ],
+                          ),
+                          primaryMeasureAxis: const charts.NumericAxisSpec(
+                            renderSpec: charts.GridlineRendererSpec(
+                              labelStyle: charts.TextStyleSpec(
+                                fontSize: 10,
+                                color: charts.MaterialPalette.black,
                               ),
                             ),
                           ),
@@ -150,37 +120,35 @@ class DashboardScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSummaryCard(String title, String value, IconData icon) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      elevation: 2,
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Row(
-          children: [
-            CircleAvatar(
-              radius: 20,
-              child: Icon(icon, size: 20),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(title,
-                      style: const TextStyle(fontSize: 12, color: Colors.grey)),
-                  const SizedBox(height: 6),
-                  Text(
-                    value,
-                    style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
+  List<charts.Series<StepData, String>> _createWeeklyData(
+      List<int> weeklySteps) {
+    final today = DateTime.now();
+    final data = List<StepData>.generate(
+      weeklySteps.length,
+      (i) {
+        final day = DateTime(today.year, today.month, today.day)
+            .subtract(Duration(days: 6 - i));
+        final shortDay =
+            ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][day.weekday - 1];
+        return StepData(shortDay, weeklySteps[i]);
+      },
     );
+
+    return [
+      charts.Series<StepData, String>(
+        id: 'Steps',
+        data: data,
+        domainFn: (StepData steps, _) => steps.day,
+        measureFn: (StepData steps, _) => steps.steps,
+        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+      )
+    ];
   }
+}
+
+class StepData {
+  final String day;
+  final int steps;
+
+  StepData(this.day, this.steps);
 }
